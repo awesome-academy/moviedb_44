@@ -1,4 +1,4 @@
-# moviedb_44
+# Movie DB 44
 
 + Trainee :
 +  - [DN_Intern_Android] Mai Văn Anh
