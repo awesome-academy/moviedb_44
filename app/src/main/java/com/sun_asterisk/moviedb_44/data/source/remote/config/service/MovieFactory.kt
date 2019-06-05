@@ -7,7 +7,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object MovieFactory {
-    private const val BASE_URL = "https://api.themoviedb.org/3"
+    private const val BASE_URL = "https://api.themoviedb.org/3/"
 
     fun create(): MovieApi {
         val loggingInterceptor = HttpLoggingInterceptor()
