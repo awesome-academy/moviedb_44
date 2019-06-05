@@ -1,4 +1,4 @@
-package com.sun_asterisk.moviedb_44.units
+package com.sun_asterisk.moviedb_44.utils
 
 import androidx.annotation.IntDef
 
