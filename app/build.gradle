@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    dataBinding {
+        enabled = true
+    }
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "com.sun_asterisk.moviedb_44"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:' + rootProject.ext.appcompatVersion
+    implementation 'androidx.core:core-ktx:' + rootProject.ext.coreKtxVersion
+    implementation 'androidx.constraintlayout:constraintlayout:' + rootProject.ext.constraintlayoutVersion
+    testImplementation 'junit:junit:' + rootProject.ext.junitVersion
+    androidTestImplementation 'androidx.test:runner:' + rootProject.ext.runnerVersion
+    androidTestImplementation 'androidx.test.espresso:espresso-core:' + rootProject.ext.espressoCoreVersion
+
+    implementation 'com.google.android.material:material:' + rootProject.ext.materialVersion
+    implementation 'androidx.cardview:cardview:' + rootProject.ext.cardviewVersion
+
+    implementation "io.reactivex.rxjava2:rxjava:" + rootProject.ext.rxjavaVersion
+    implementation "io.reactivex.rxjava2:rxandroid:" + rootProject.ext.rxandroidVersion
+
+    implementation 'com.github.bumptech.glide:glide:' + rootProject.ext.glideVersion
+    annotationProcessor 'com.github.bumptech.glide:compiler:' + rootProject.ext.glideComplierVersion
+
+    implementation 'de.hdodenhof:circleimageview:' + rootProject.ext.circleimageviewVersion
+
+    implementation 'com.google.code.gson:gson:' + rootProject.ext.gsonVersion
+
+    implementation 'com.squareup.retrofit2:retrofit:' + rootProject.ext.retrofitVersion
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:' + rootProject.ext.adapterRxjava2Version
+    implementation 'com.squareup.retrofit2:converter-gson:' + rootProject.ext.converterGsonVersion
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:' + rootProject.ext.loggingInterceptorVersion
+    implementation 'com.squareup.okhttp3:okhttp:' + rootProject.ext.okhttpVersion
+}
