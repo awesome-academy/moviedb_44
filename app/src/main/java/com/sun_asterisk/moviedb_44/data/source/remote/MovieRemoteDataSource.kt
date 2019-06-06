@@ -38,4 +38,13 @@ class MovieRemoteDataSource private constructor(private val movieApi: MovieApi) 
         return movieApi.getListProducers(movieId)
             .flatMap { producerResponse -> Observable.just(producerResponse.listProducer) }
     }
+
+    override fun getListMovieTopRated(page: Int): Observable<MutableList<Movie>> {
+        return movieApi.getListMovieTopRated(page).flatMap { movieResponse -> Observable.just(movieResponse.movieList) }
+    }
+
+    override fun getListMovieNowPlaying(page: Int): Observable<MutableList<Movie>> {
+        return movieApi.getListMovieNowPlaying(page)
+            .flatMap { movieResponse -> Observable.just(movieResponse.movieList) }
+    }
 }

@@ -31,4 +31,8 @@ class MovieRepository private constructor(
     fun getListMoviePopular(page: Int): Observable<MutableList<Movie>> = remote.getListMoviePopular(page)
 
     fun getListMovieUpcoming(page: Int): Observable<MutableList<Movie>> = remote.getListMovieUpcoming(page)
+
+    fun getListMovieTopRated(page: Int): Observable<MutableList<Movie>> = remote.getListMovieTopRated(page)
+
+    fun getListMovieNowPlaying(page: Int): Observable<MutableList<Movie>> = remote.getListMovieNowPlaying(page)
 }
