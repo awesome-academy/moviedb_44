@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View"/>
+
         <variable
             name="movie"
             type="com.sun_asterisk.moviedb_44.data.model.Movie"/>
@@ -48,6 +50,7 @@
             android:contentDescription="@string/content_description"
             android:focusable="true"
             android:src="@drawable/btn_play_clicked"
+            android:visibility="@{movie != null ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/imgBackDrop"
             app:layout_constraintEnd_toEndOf="@id/imgBackDrop"/>
 

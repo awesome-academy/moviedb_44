@@ -22,9 +22,12 @@ data class Movie(
     companion object {
         private const val TOTAL_RATE_API = 10
         private const val TOTAL_RATE_APP_MOBILE = 5
+        private const val NUMBER_ROUND_TWO_DIGITS = 100.0
     }
 
-    fun getCustomVoteAverage(): Float = (voteAverage / TOTAL_RATE_API) * TOTAL_RATE_APP_MOBILE
+    fun getCustomVoteAverage(): Float = (Math.round(
+        (voteAverage / TOTAL_RATE_API) * TOTAL_RATE_APP_MOBILE * NUMBER_ROUND_TWO_DIGITS)
+        / NUMBER_ROUND_TWO_DIGITS).toFloat()
 
     fun getUrlBackDrop(): String = Constant.BASE_BACKDROP_PATH + backdropPath
 

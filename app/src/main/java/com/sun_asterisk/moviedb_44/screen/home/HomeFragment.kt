@@ -11,6 +11,9 @@ import com.sun_asterisk.moviedb_44.data.source.local.MovieLocalDataSource
 import com.sun_asterisk.moviedb_44.data.source.remote.MovieRemoteDataSource
 import com.sun_asterisk.moviedb_44.databinding.FragmentHomeBinding
 import com.sun_asterisk.moviedb_44.screen.base.BaseFragment
+import com.sun_asterisk.moviedb_44.utils.CategoryAnnotation
+import kotlinx.android.synthetic.main.category_recycler.view.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -21,10 +24,8 @@ class HomeFragment : BaseFragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil
             .inflate(inflater, R.layout.fragment_home, container, false)
         viewModel =
@@ -33,8 +34,23 @@ class HomeFragment : BaseFragment() {
         binding.viewModel = viewModel
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         binding.toolbar.setTitleTextColor(Color.WHITE)
-        viewModel.onStart()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.onStart()
+    }
+
+    private fun initView() {
+        popularRecyclerView.tvCategory.text = CategoryAnnotation.POPULAR
+        upComingRecyclerView.tvCategory.text = CategoryAnnotation.UPCOMING
+        playNowRecyclerView.tvCategory.text = CategoryAnnotation.NOW_PLAYING
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
