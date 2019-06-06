@@ -17,7 +17,7 @@ object BindingUtils {
 
     @BindingAdapter("imgUrl")
     @JvmStatic
-    fun setImageUrl(imageView: ImageView, url: String) {
+    fun setImageUrl(imageView: ImageView, url: String?) {
         Glide.with(imageView.context).load(url).thumbnail(THUMBNAIL_SIZE_MULTIPLIER)
             .into(imageView)
     }

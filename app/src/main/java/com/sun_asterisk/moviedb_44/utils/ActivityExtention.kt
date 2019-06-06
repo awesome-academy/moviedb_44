@@ -25,7 +25,7 @@ fun AppCompatActivity.popBackStackInclusive() {
 }
 
 fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
-    beginTransaction().setCustomAnimations(R.anim.animation_enter, R.anim.animation_leave).func().commit()
+    beginTransaction().func().commit()
 }
 
 fun AppCompatActivity.addFragment(fragment: Fragment, frameId: Int) {
