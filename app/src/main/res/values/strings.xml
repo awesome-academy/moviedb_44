@@ -6,4 +6,7 @@
     <string name="title_search">Search</string>
     <string name="content_description">Backdrop for movie</string>
     <string name="more">More</string>
+    <string name="search">Search</string>
+    <string name="plz_input_movie_name">Plz, input movie name</string>
+    <string name="announce_no_data">No data, please find again by others key</string>
 </resources>
