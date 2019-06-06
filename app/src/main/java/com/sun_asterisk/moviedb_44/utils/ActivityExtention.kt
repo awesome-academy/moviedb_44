@@ -1,4 +1,4 @@
-package com.sun_asterisk.moviedb_44.units
+package com.sun_asterisk.moviedb_44.utils
 
 import android.app.Activity
 import android.content.Context
