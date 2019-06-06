@@ -28,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/ic_place_holder"
-            imgUrl="@{viewModel.movie.getUrlPoster}"/>
+            imgUrl="@{viewModel.movie.posterPath}"/>
 
         <TextView
             android:id="@+id/tvTitle"

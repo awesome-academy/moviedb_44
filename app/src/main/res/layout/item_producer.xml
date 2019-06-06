@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="producer"
+            type="com.sun_asterisk.moviedb_44.data.model.Producer"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/dp_8"
+            android:contentDescription="@string/content_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="3:4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            imgUrl="@{producer.profilePath}"/>
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{producer.name}"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imgAvatar"
+            app:layout_constraintEnd_toEndOf="@+id/imgAvatar"
+            app:layout_constraintStart_toStartOf="@+id/imgAvatar"
+            app:layout_constraintWidth_percent="0.8"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
