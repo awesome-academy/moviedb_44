@@ -13,6 +13,9 @@
             android:name=".screen.search.SearchActivity"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".screen.detail.DetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".screen.main.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
