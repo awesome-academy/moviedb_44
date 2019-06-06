@@ -6,26 +6,29 @@
     <data>
 
         <variable
-            name="actor"
-            type="com.sun_asterisk.moviedb_44.data.model.Actor"/>
+            name="viewModel"
+            type="com.sun_asterisk.moviedb_44.screen.detail.ItemActorViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.onItemClick()}">
 
         <ImageView
             android:id="@+id/imgAvatar"
             android:layout_width="@dimen/dp_120"
             android:layout_height="0dp"
             android:layout_margin="@dimen/dp_8"
+            android:scaleType="centerCrop"
+            android:background="@drawable/ic_place_holder"
             android:contentDescription="@string/content_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="3:4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            imgUrl="@{actor.profilePath}"/>
+            imgUrl="@{viewModel.actor.profilePath}"/>
 
         <TextView
             android:id="@+id/tvName"
@@ -34,7 +37,8 @@
             android:layout_marginBottom="@dimen/dp_16"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{actor.name}"
+            android:textAlignment="center"
+            android:text="@{viewModel.actor.name}"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_18"
             android:textStyle="bold"
