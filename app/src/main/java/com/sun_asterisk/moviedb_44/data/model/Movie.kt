@@ -1,6 +1,7 @@
 package com.sun_asterisk.moviedb_44.data.model
 
 import com.google.gson.annotations.SerializedName
+import com.sun_asterisk.moviedb_44.utils.Constant
 
 data class Movie(
     val id: Int,
@@ -16,4 +17,16 @@ data class Movie(
     val overview: String,
     @SerializedName("release_date")
     val releaseDate: String
-)
+) {
+
+    companion object {
+        private const val TOTAL_RATE_API = 10
+        private const val TOTAL_RATE_APP_MOBILE = 5
+    }
+
+    fun getCustomVoteAverage(): Float = (voteAverage / TOTAL_RATE_API) * TOTAL_RATE_APP_MOBILE
+
+    fun getUrlBackDrop(): String = Constant.BASE_BACKDROP_PATH + backdropPath
+
+    fun getUrlPoster(): String = Constant.BASE_POSTER_PATH + backdropPath
+}
