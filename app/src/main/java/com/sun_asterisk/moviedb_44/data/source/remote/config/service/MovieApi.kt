@@ -33,4 +33,8 @@ interface MovieApi {
 
     @GET("movie/now_playing?api_key=" + BuildConfig.API_KEY + Constant.language)
     fun getListMovieNowPlaying(@Query("page") page: Int): Observable<MovieResponse>
+
+    @GET("search/movie?api_key=" + BuildConfig.API_KEY + Constant.language)
+    fun searchMovie(@Query("query") search: String, @Query("page") page: Int,
+        @Query("include_adult") isAdult: Boolean): Observable<MovieResponse>
 }

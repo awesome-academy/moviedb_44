@@ -4,17 +4,18 @@ import com.sun_asterisk.moviedb_44.data.model.Actor
 import com.sun_asterisk.moviedb_44.data.model.Movie
 import com.sun_asterisk.moviedb_44.data.source.local.MovieLocalDataSource
 import com.sun_asterisk.moviedb_44.data.source.remote.MovieRemoteDataSource
+import com.sun_asterisk.moviedb_44.utils.Constant
 import io.reactivex.Observable
 
 class MovieRepository private constructor(
     private val local: MovieLocalDataSource,
-    private val remote: MovieRemoteDataSource
-) {
+    private val remote: MovieRemoteDataSource) {
     companion object {
         private var sInstance: MovieRepository? = null
 
         @JvmStatic
-        fun getInstance(local: MovieLocalDataSource, remote: MovieRemoteDataSource): MovieRepository {
+        fun getInstance(local: MovieLocalDataSource,
+            remote: MovieRemoteDataSource): MovieRepository {
             if (sInstance == null) {
                 synchronized(MovieRepository::class.java) {
                     sInstance = MovieRepository(local, remote)
@@ -35,4 +36,7 @@ class MovieRepository private constructor(
     fun getListMovieTopRated(page: Int): Observable<MutableList<Movie>> = remote.getListMovieTopRated(page)
 
     fun getListMovieNowPlaying(page: Int): Observable<MutableList<Movie>> = remote.getListMovieNowPlaying(page)
+
+    fun searchMovie(search: String, page: Int = Constant.PAGE_DEFAULT,
+        isAdult: Boolean = false) = remote.searchMovie(search, page, isAdult)
 }

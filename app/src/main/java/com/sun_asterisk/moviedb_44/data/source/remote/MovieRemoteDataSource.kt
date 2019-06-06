@@ -27,11 +27,13 @@ class MovieRemoteDataSource private constructor(private val movieApi: MovieApi) 
     override fun getMovieLatest(): Observable<Movie> = movieApi.getMovieLatest()
 
     override fun getListMoviePopular(page: Int): Observable<MutableList<Movie>> {
-        return movieApi.getListMoviePopular(page).flatMap { movieResponse -> Observable.just(movieResponse.movieList) }
+        return movieApi.getListMoviePopular(page)
+            .flatMap { movieResponse -> Observable.just(movieResponse.movieList) }
     }
 
     override fun getListMovieUpcoming(page: Int): Observable<MutableList<Movie>> {
-        return movieApi.getListMovieUpcoming(page).flatMap { movieResponse -> Observable.just(movieResponse.movieList) }
+        return movieApi.getListMovieUpcoming(page)
+            .flatMap { movieResponse -> Observable.just(movieResponse.movieList) }
     }
 
     override fun getProducers(movieId: Int): Observable<List<Producer>> {
@@ -40,11 +42,18 @@ class MovieRemoteDataSource private constructor(private val movieApi: MovieApi) 
     }
 
     override fun getListMovieTopRated(page: Int): Observable<MutableList<Movie>> {
-        return movieApi.getListMovieTopRated(page).flatMap { movieResponse -> Observable.just(movieResponse.movieList) }
+        return movieApi.getListMovieTopRated(page)
+            .flatMap { movieResponse -> Observable.just(movieResponse.movieList) }
     }
 
     override fun getListMovieNowPlaying(page: Int): Observable<MutableList<Movie>> {
         return movieApi.getListMovieNowPlaying(page)
+            .flatMap { movieResponse -> Observable.just(movieResponse.movieList) }
+    }
+
+    override fun searchMovie(search: String, page: Int,
+        isAdult: Boolean): Observable<MutableList<Movie>> {
+        return movieApi.searchMovie(search, page, isAdult)
             .flatMap { movieResponse -> Observable.just(movieResponse.movieList) }
     }
 }
