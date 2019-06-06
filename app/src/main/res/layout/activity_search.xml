@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_16"
             android:layout_marginStart="@dimen/dp_16"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/dp_8"
             android:ems="10"
             android:hint="@string/plz_input_movie_name"
             android:inputType="text"
@@ -78,5 +78,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAnnounce"/>
+
+        <ProgressBar
+            android:id="@+id/bottomProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.bottomProgressBarObservable ? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            style="?android:attr/progressBarStyle"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

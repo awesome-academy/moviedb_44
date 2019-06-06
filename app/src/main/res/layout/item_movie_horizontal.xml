@@ -6,13 +6,14 @@
     <data>
 
         <variable
-            name="movie"
-            type="com.sun_asterisk.moviedb_44.data.model.Movie"/>
+            name="viewModel"
+            type="com.sun_asterisk.moviedb_44.screen.home.ItemMovieViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.onItemClick()}"
         android:background="@color/colorBlueGrey800">
 
         <ImageView
@@ -26,8 +27,8 @@
             app:layout_constraintDimensionRatio="3:4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_foreground"
-            imgUrl="@{movie.getUrlPoster}"/>
+            android:background="@drawable/ic_place_holder"
+            imgUrl="@{viewModel.movie.getUrlPoster}"/>
 
         <TextView
             android:id="@+id/tvTitle"
@@ -36,7 +37,7 @@
             android:layout_margin="@dimen/dp_16"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{movie.title}"
+            android:text="@{viewModel.movie.title}"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_22"
             android:textStyle="bold"
@@ -51,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_16"
             android:numStars="5"
-            android:rating="@{movie.getCustomVoteAverage}"
+            android:rating="@{viewModel.movie.getCustomVoteAverage}"
             app:layout_constraintStart_toStartOf="@+id/tvTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle"
             style="@style/Widget.AppCompat.RatingBar.Small"/>
@@ -62,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_16"
             android:ellipsize="end"
-            android:text="@{movie.releaseDate}"
+            android:text="@{viewModel.movie.releaseDate}"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_14"
             app:layout_constraintStart_toStartOf="@+id/ratingBarItemHorizontal"
@@ -74,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_16"
             android:layout_marginStart="@dimen/dp_8"
-            android:text="@{movie.getStringVoteCount}"
+            android:text="@{viewModel.movie.getStringVoteCount}"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="@+id/ratingBarItemHorizontal"
