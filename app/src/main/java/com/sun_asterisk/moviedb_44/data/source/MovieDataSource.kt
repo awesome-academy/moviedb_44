@@ -14,5 +14,7 @@ interface MovieDataSource {
         fun getMovieLatest(): Observable<Movie>
         fun getListMoviePopular(page: Int): Observable<MutableList<Movie>>
         fun getListMovieUpcoming(page: Int): Observable<MutableList<Movie>>
+        fun getListMovieTopRated(page: Int): Observable<MutableList<Movie>>
+        fun getListMovieNowPlaying(page: Int): Observable<MutableList<Movie>>
     }
 }
