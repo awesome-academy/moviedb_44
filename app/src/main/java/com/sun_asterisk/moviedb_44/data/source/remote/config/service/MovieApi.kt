@@ -22,7 +22,7 @@ interface MovieApi {
     @GET("movie/popular?api_key=" + BuildConfig.API_KEY + Constant.language)
     fun getListMoviePopular(@Query("page") page: Int): Observable<MovieResponse>
 
-    @GET("movie/upcoming?api_key" + BuildConfig.API_KEY + Constant.language)
+    @GET("movie/upcoming?api_key=" + BuildConfig.API_KEY + Constant.language)
     fun getListMovieUpcoming(@Query("page") page: Int): Observable<MovieResponse>
 
     @GET("movie/{movie_id}/credits?api_key=" + BuildConfig.API_KEY)
