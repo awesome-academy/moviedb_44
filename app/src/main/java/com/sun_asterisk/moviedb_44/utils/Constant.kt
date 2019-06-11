@@ -6,4 +6,5 @@ object Constant {
     const val BASE_POSTER_PATH = "https://image.tmdb.org/t/p/w185_and_h278_bestv2"
     const val PAGE_DEFAULT = 1
     const val RATING = " rating"
+    const val AMOUNT_ITEM_IN_PER_PAGE = 20
 }

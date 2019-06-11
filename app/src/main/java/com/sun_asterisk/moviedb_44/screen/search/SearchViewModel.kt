@@ -9,15 +9,17 @@ import com.sun_asterisk.moviedb_44.data.repository.MovieRepository
 import com.sun_asterisk.moviedb_44.screen.base.BaseViewModel
 import com.sun_asterisk.moviedb_44.screen.search.adapter.MovieHorizontalAdapter
 import com.sun_asterisk.moviedb_44.utils.Constant
+import com.sun_asterisk.moviedb_44.utils.OnItemRecyclerViewClickListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class SearchViewModel(private val movieRepository: MovieRepository) : BaseViewModel() {
+class SearchViewModel(private val movieRepository: MovieRepository, listener: OnItemRecyclerViewClickListener<Movie>) : BaseViewModel() {
     private var page = Constant.PAGE_DEFAULT
     private var oldSearchContent: String = ""
     private var newSearchContent: String = ""
     val topProgressBarObservable: ObservableBoolean = ObservableBoolean()
+    val bottomProgressBarObservable: ObservableBoolean = ObservableBoolean()
     val announceObservable: ObservableBoolean = ObservableBoolean()
     val recyclerViewObservable: ObservableBoolean = ObservableBoolean()
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
@@ -35,7 +37,7 @@ class SearchViewModel(private val movieRepository: MovieRepository) : BaseViewMo
     }
 
     init {
-        movieAdapter.set(MovieHorizontalAdapter())
+        movieAdapter.set(MovieHorizontalAdapter(listener))
         setupOriginal()
     }
 
@@ -46,10 +48,18 @@ class SearchViewModel(private val movieRepository: MovieRepository) : BaseViewMo
     }
 
     fun initData() {
+        page = Constant.PAGE_DEFAULT
         if (newSearchContent != oldSearchContent) {
             getData()
         } else {
             recyclerViewObservable.set(true)
+        }
+    }
+
+    fun loadMore() {
+        if ((movieAdapter.get()!!.itemCount % Constant.AMOUNT_ITEM_IN_PER_PAGE) == 0) {
+            page++
+            getData()
         }
     }
 
@@ -60,10 +70,12 @@ class SearchViewModel(private val movieRepository: MovieRepository) : BaseViewMo
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe {
                     announceObservable.set(false)
-                    topProgressBarObservable.set(true)
+                    if (page == Constant.PAGE_DEFAULT) topProgressBarObservable.set(true)
+                    else bottomProgressBarObservable.set(true)
                 }
                 .doOnTerminate {
                     topProgressBarObservable.set(false)
+                    bottomProgressBarObservable.set(false)
                 }
                 .subscribe(
                     { movies ->
@@ -82,7 +94,8 @@ class SearchViewModel(private val movieRepository: MovieRepository) : BaseViewMo
     }
 
     private fun onSearchSuccess(movies: MutableList<Movie>) {
-        movieAdapter.get()!!.clearList()
+        if (page == Constant.PAGE_DEFAULT)
+            movieAdapter.get()!!.clearList()
         oldSearchContent = newSearchContent
         movieAdapter.get()!!.addItems(movies)
         recyclerViewObservable.set(true)
