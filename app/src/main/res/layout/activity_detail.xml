@@ -10,6 +10,10 @@
         <variable
             name="movie"
             type="com.sun_asterisk.moviedb_44.data.model.Movie"/>
+
+        <variable
+            name="viewModel"
+            type="com.sun_asterisk.moviedb_44.screen.detail.DetailViewModel"/>
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -86,7 +90,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_8"
-                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_8"
                 android:text="@{movie.overview}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -100,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="@string/more"
+                android:textColor="@color/colorYellow700"
                 app:layout_constraintStart_toStartOf="@+id/tvOverview"
                 app:layout_constraintTop_toBottomOf="@+id/tvOverview"
                 style="@style/Text.Title"/>
@@ -108,7 +113,8 @@
                 android:id="@+id/tvActor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@string/actor"
                 app:layout_constraintStart_toStartOf="@+id/tvMore"
                 app:layout_constraintTop_toBottomOf="@+id/tvMore"
                 style="@style/Text.Title"/>
@@ -119,6 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
                 android:orientation="horizontal"
+                adapter="@{viewModel.actorAdapter}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -140,6 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
                 android:orientation="horizontal"
+                adapter="@{viewModel.producerAdapter}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
