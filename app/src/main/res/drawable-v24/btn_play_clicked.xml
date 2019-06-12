@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:color="@color/colorBlueGrey800"
-        android:drawable="@drawable/ic_play_holder"
-        android:state_pressed="true"/>
 
-    <item
-        android:color="@color/colorBlueGrey800"
-        android:drawable="@drawable/ic_play"/>
+    <item android:state_pressed="true" android:drawable="@drawable/ic_play_holder"/>
+    <item android:drawable="@drawable/ic_play"/>
 </selector>

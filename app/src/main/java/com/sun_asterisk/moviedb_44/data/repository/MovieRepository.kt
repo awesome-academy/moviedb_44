@@ -2,6 +2,7 @@ package com.sun_asterisk.moviedb_44.data.repository
 
 import com.sun_asterisk.moviedb_44.data.model.Actor
 import com.sun_asterisk.moviedb_44.data.model.Movie
+import com.sun_asterisk.moviedb_44.data.model.Producer
 import com.sun_asterisk.moviedb_44.data.source.local.MovieLocalDataSource
 import com.sun_asterisk.moviedb_44.data.source.remote.MovieRemoteDataSource
 import com.sun_asterisk.moviedb_44.utils.Constant
@@ -39,4 +40,6 @@ class MovieRepository private constructor(
 
     fun searchMovie(search: String, page: Int = Constant.PAGE_DEFAULT,
         isAdult: Boolean = false) = remote.searchMovie(search, page, isAdult)
+
+    fun getProducers(movieId: Int): Observable<List<Producer>> = remote.getProducers(movieId)
 }

@@ -15,9 +15,13 @@ object BindingUtils {
         recyclerView.adapter = adapter
     }
 
-    @BindingAdapter("imgUrl")
+    @BindingAdapter(value = ["imgUrl", "bind:type"], requireAll = false)
     @JvmStatic
-    fun setImageUrl(imageView: ImageView, url: String?) {
+    fun setImageUrl(imageView: ImageView, path: String?, type: Int = 0) {
+        val url: String = if (type == 1)
+            Constant.BASE_BACKDROP_PATH + path
+         else Constant.BASE_POSTER_PATH + path
+
         Glide.with(imageView.context).load(url).thumbnail(THUMBNAIL_SIZE_MULTIPLIER)
             .into(imageView)
     }
