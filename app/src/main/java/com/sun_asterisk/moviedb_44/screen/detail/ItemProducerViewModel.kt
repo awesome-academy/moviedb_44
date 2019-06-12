@@ -10,7 +10,7 @@ class ItemProducerViewModel(private val listener: OnItemRecyclerViewClickListene
     @Bindable
     var producer: Producer? = null
 
-    fun setData(data : Producer) {
+    fun setData(data : Producer?) {
         data?.let {
             producer = it
             notifyPropertyChanged(BR.producer)

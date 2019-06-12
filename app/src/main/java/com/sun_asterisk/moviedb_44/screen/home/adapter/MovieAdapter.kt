@@ -6,22 +6,25 @@ import com.sun_asterisk.moviedb_44.data.model.Movie
 import com.sun_asterisk.moviedb_44.databinding.ItemMovieBinding
 import com.sun_asterisk.moviedb_44.screen.base.BaseAdapter
 import com.sun_asterisk.moviedb_44.screen.base.BaseViewHolder
+import com.sun_asterisk.moviedb_44.screen.home.ItemMovieViewModel
+import com.sun_asterisk.moviedb_44.utils.OnItemRecyclerViewClickListener
 
-class MovieAdapter : BaseAdapter<Movie>() {
+class MovieAdapter constructor(private val listener: OnItemRecyclerViewClickListener<Movie>) : BaseAdapter<Movie>(){
 
     override fun layout(row: Int): Int = R.layout.item_movie
 
     override fun viewHolder(
         binding: ViewDataBinding): BaseViewHolder<Movie> = MovieAdapterViewHolder(
-        binding as ItemMovieBinding)
+        binding as ItemMovieBinding, listener)
 
     companion object {
 
-        class MovieAdapterViewHolder(private val itemMovieBinding: ItemMovieBinding) :
+        class MovieAdapterViewHolder(private val itemMovieBinding: ItemMovieBinding, private val listener: OnItemRecyclerViewClickListener<Movie>) :
             BaseViewHolder<Movie>(itemMovieBinding) {
 
             override fun bindData(data: Movie) {
-                itemMovieBinding.movie = data
+                itemMovieBinding.viewModel = ItemMovieViewModel(listener)
+                itemMovieBinding.viewModel?.setData(data)
                 itemMovieBinding.executePendingBindings()
             }
         }

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
-            name="movie"
-            type="com.sun_asterisk.moviedb_44.data.model.Movie"/>
+            name="viewModel"
+            type="com.sun_asterisk.moviedb_44.screen.home.ItemMovieViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.onItemClick()}">
 
         <ImageView
             android:id="@+id/imgPoster"
@@ -30,7 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            imgUrl="@{movie.posterPath}"/>
+            imgUrl="@{viewModel.movie.posterPath}"/>
 
         <TextView
             android:id="@+id/tvTitle"
@@ -41,7 +41,7 @@
             android:layout_marginStart="@dimen/dp_8"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{movie.title}"
+            android:text="@{viewModel.movie.title}"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_18"
             app:layout_constraintBottom_toTopOf="@+id/tvRating"
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_16"
             android:layout_marginStart="@dimen/dp_8"
-            android:text="@{String.valueOf(movie.getCustomVoteAverage)}"
+            android:text="@{String.valueOf(viewModel.movie.getCustomVoteAverage)}"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="@+id/imgPoster"

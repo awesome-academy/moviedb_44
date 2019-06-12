@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <import type="android.view.View"/>
 
         <variable
-            name="movie"
-            type="com.sun_asterisk.moviedb_44.data.model.Movie"/>
+            name="viewModel"
+            type="com.sun_asterisk.moviedb_44.screen.home.BannerViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.onItemClick()}"
         android:background="@color/colorBlueGrey800">
 
         <ImageView
@@ -28,8 +28,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:type="@{1}"
-            imgUrl="@{movie.backdropPath}"/>
+            type="@{1}"
+            imgUrl="@{viewModel.movie.backdropPath}"/>
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -37,24 +37,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_16"
             android:numStars="5"
-            android:rating="@{movie.getCustomVoteAverage}"
+            android:rating="@{viewModel.movie.getCustomVoteAverage}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvTitle"
             style="@style/Widget.AppCompat.RatingBar.Indicator"/>
-
-        <ImageView
-            android:id="@+id/imgPlay"
-            android:layout_width="@dimen/dp_60"
-            android:layout_height="@dimen/dp_60"
-            android:layout_marginBottom="@dimen/dp_8"
-            android:layout_marginEnd="@dimen/dp_8"
-            android:clickable="true"
-            android:contentDescription="@string/content_description"
-            android:focusable="true"
-            android:src="@drawable/btn_play_clicked"
-            android:visibility="@{movie != null ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="@id/imgBackDrop"
-            app:layout_constraintEnd_toEndOf="@id/imgBackDrop"/>
 
         <TextView
             android:id="@+id/tvTitle"
@@ -65,7 +51,7 @@
             android:layout_marginStart="@dimen/dp_16"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="@{movie.title}"
+            android:text="@{viewModel.movie.title}"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/sp_22"
             app:layout_constraintBottom_toTopOf="@+id/ratingBar"

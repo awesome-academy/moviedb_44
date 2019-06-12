@@ -66,6 +66,6 @@ class SearchActivity : AppCompatActivity(), OnItemRecyclerViewClickListener<Movi
     }
 
     companion object {
-        fun getSearchProfile(context: Context): Intent = Intent(context, SearchActivity::class.java)
+        fun getIntentSearch(context: Context): Intent = Intent(context, SearchActivity::class.java)
     }
 }
