@@ -15,6 +15,7 @@ import com.sun_asterisk.moviedb_44.data.repository.MovieRepository
 import com.sun_asterisk.moviedb_44.data.source.local.MovieLocalDataSource
 import com.sun_asterisk.moviedb_44.data.source.remote.MovieRemoteDataSource
 import com.sun_asterisk.moviedb_44.databinding.ActivitySearchBinding
+import com.sun_asterisk.moviedb_44.screen.detail.DetailActivity
 import com.sun_asterisk.moviedb_44.utils.EndlessRecyclerOnScrollListener
 import com.sun_asterisk.moviedb_44.utils.OnItemRecyclerViewClickListener
 import com.sun_asterisk.moviedb_44.utils.hideKeyboard
@@ -55,6 +56,7 @@ class SearchActivity : AppCompatActivity(), OnItemRecyclerViewClickListener<Movi
     }
 
     override fun onItemClick(data: Movie) {
+        startActivity(DetailActivity.getIntentDetail(applicationContext, data))
     }
 
     override fun onClick(v: View?) {
