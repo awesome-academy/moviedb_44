@@ -9,6 +9,7 @@ import com.sun_asterisk.moviedb_44.R
 import com.sun_asterisk.moviedb_44.data.model.Movie
 import com.sun_asterisk.moviedb_44.data.repository.MovieRepository
 import com.sun_asterisk.moviedb_44.data.source.local.MovieLocalDataSource
+import com.sun_asterisk.moviedb_44.data.source.local.config.dao.MovieDatabase
 import com.sun_asterisk.moviedb_44.data.source.remote.MovieRemoteDataSource
 import com.sun_asterisk.moviedb_44.databinding.ActivityDetailBinding
 import com.sun_asterisk.moviedb_44.utils.OnItemRecyclerViewClickListener
@@ -22,13 +23,13 @@ class DetailActivity : AppCompatActivity(), OnItemRecyclerViewClickListener<Int>
         super.onCreate(savedInstanceState)
         movie = intent.getParcelableExtra(EXTRA_MOVIE)
         viewModel = DetailViewModel(MovieRepository.getInstance(
-                MovieLocalDataSource(), MovieRemoteDataSource.getInstance()), this)
+                MovieLocalDataSource.getInstance(MovieDatabase.getInstance(applicationContext).movieDAO()),
+                MovieRemoteDataSource.getInstance()), this)
         binding = setContentView(this, R.layout.activity_detail)
         binding.movie = movie
         binding.viewModel = viewModel
         viewModel.getActorAndProducer(movie.id)
     }
-
     override fun onItemClick(data: Int) {
     }
 

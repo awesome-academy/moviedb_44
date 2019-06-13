@@ -6,6 +6,7 @@ import com.sun_asterisk.moviedb_44.data.model.Producer
 import com.sun_asterisk.moviedb_44.data.source.local.MovieLocalDataSource
 import com.sun_asterisk.moviedb_44.data.source.remote.MovieRemoteDataSource
 import com.sun_asterisk.moviedb_44.utils.Constant
+import io.reactivex.Flowable
 import io.reactivex.Observable
 
 class MovieRepository private constructor(
@@ -42,4 +43,12 @@ class MovieRepository private constructor(
         isAdult: Boolean = false) = remote.searchMovie(search, page, isAdult)
 
     fun getProducers(movieId: Int): Observable<List<Producer>> = remote.getProducers(movieId)
+
+    fun isMovieFavorite(idMovie: Int): Flowable<Boolean> = local.isMovieFavorite(idMovie)
+
+    fun getAllMoviesFavorite() : Flowable<MutableList<Movie>> = local.getAllMoviesFavorite()
+
+    fun addMovieFavorite(movie: Movie) = local.addMovieFavorite(movie)
+
+    fun deleteMovieFavorite(movie: Movie) = local.deleteMovieFavorite(movie)
 }

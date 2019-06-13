@@ -4,10 +4,19 @@ import com.sun_asterisk.moviedb_44.data.model.Actor
 import com.sun_asterisk.moviedb_44.data.model.Movie
 import com.sun_asterisk.moviedb_44.data.model.Producer
 import com.sun_asterisk.moviedb_44.utils.Constant
+import io.reactivex.Flowable
 import io.reactivex.Observable
 
 interface MovieDataSource {
-    interface MovieLocalDataSource
+    interface MovieLocalDataSource {
+        fun isMovieFavorite(idMovie: Int): Flowable<Boolean>
+
+        fun getAllMoviesFavorite() : Flowable<MutableList<Movie>>
+
+        fun addMovieFavorite(movie: Movie)
+
+        fun deleteMovieFavorite(movie: Movie)
+    }
 
     interface MovieRemoteDataSource {
         fun getActors(movieId: Int): Observable<List<Actor>>
