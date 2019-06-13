@@ -10,58 +10,64 @@
             type="com.sun_asterisk.moviedb_44.screen.home.HomeViewModel"/>
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorBlueGrey800">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorBlueGrey800">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorGrey900"
-                android:elevation="@dimen/dp_4"
-                app:layout_constraintTop_toTopOf="parent"/>
+                android:layout_height="match_parent">
 
-            <include
-                layout="@layout/layout_banner"
-                android:id="@+id/banner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                app:movie="@{viewModel.movieObservable}"/>
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/colorGrey900"
+                    android:elevation="@dimen/dp_4"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-            <include
-                layout="@layout/category_recycler"
-                android:id="@+id/popularRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
-                app:adapter="@{viewModel.popularAdapter}"
-                app:layout_constraintTop_toBottomOf="@+id/banner"/>
+                <include
+                    layout="@layout/layout_banner"
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                    app:viewModel="@{viewModel.bannerObservable}"/>
 
-            <include
-                layout="@layout/category_recycler"
-                android:id="@+id/upComingRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
-                app:adapter="@{viewModel.upComingAdapter}"
-                app:layout_constraintTop_toBottomOf="@+id/popularRecyclerView"/>
+                <include
+                    layout="@layout/category_recycler"
+                    android:id="@+id/popularRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    app:adapter="@{viewModel.popularAdapter}"
+                    app:layout_constraintTop_toBottomOf="@+id/banner"/>
 
-            <include
-                layout="@layout/category_recycler"
-                android:id="@+id/playNowRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp_60"
-                android:layout_marginTop="@dimen/dp_8"
-                app:adapter="@{viewModel.playNowAdapter}"
-                app:layout_constraintTop_toBottomOf="@id/upComingRecyclerView"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+                <include
+                    layout="@layout/category_recycler"
+                    android:id="@+id/upComingRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    app:adapter="@{viewModel.upComingAdapter}"
+                    app:layout_constraintTop_toBottomOf="@+id/popularRecyclerView"/>
+
+                <include
+                    layout="@layout/category_recycler"
+                    android:id="@+id/playNowRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_60"
+                    android:layout_marginTop="@dimen/dp_8"
+                    app:adapter="@{viewModel.playNowAdapter}"
+                    app:layout_constraintTop_toBottomOf="@id/upComingRecyclerView"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

@@ -15,7 +15,7 @@ object BindingUtils {
         recyclerView.adapter = adapter
     }
 
-    @BindingAdapter(value = ["imgUrl", "bind:type"], requireAll = false)
+    @BindingAdapter(value = ["imgUrl", "type"], requireAll = false)
     @JvmStatic
     fun setImageUrl(imageView: ImageView, path: String?, type: Int = 0) {
         val url: String = if (type == 1)

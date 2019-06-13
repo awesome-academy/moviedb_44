@@ -6,22 +6,28 @@ import com.sun_asterisk.moviedb_44.data.repository.MovieRepository
 import com.sun_asterisk.moviedb_44.screen.base.BaseViewModel
 import com.sun_asterisk.moviedb_44.screen.home.adapter.MovieAdapter
 import com.sun_asterisk.moviedb_44.utils.Constant
+import com.sun_asterisk.moviedb_44.utils.OnItemBannerClickListener
+import com.sun_asterisk.moviedb_44.utils.OnItemRecyclerViewClickListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class HomeViewModel constructor(private val movieRepository: MovieRepository) : BaseViewModel() {
+class HomeViewModel constructor(
+    private val movieRepository: MovieRepository,
+    itemRecyclerViewClickListener: OnItemRecyclerViewClickListener<Movie>,
+    itemBannerListener: OnItemBannerClickListener<Movie>) : BaseViewModel() {
 
-    val movieObservable: ObservableField<Movie> = ObservableField()
+    val bannerObservable = ObservableField<BannerViewModel>()
     private val mCompositeDisposable: CompositeDisposable = CompositeDisposable()
     val popularAdapter = ObservableField<MovieAdapter>()
     val upComingAdapter = ObservableField<MovieAdapter>()
     val playNowAdapter = ObservableField<MovieAdapter>()
 
     init {
-        popularAdapter.set(MovieAdapter())
-        upComingAdapter.set(MovieAdapter())
-        playNowAdapter.set(MovieAdapter())
+        popularAdapter.set(MovieAdapter(itemRecyclerViewClickListener))
+        upComingAdapter.set(MovieAdapter(itemRecyclerViewClickListener))
+        playNowAdapter.set(MovieAdapter(itemRecyclerViewClickListener))
+        bannerObservable.set(BannerViewModel(itemBannerListener))
     }
 
     override fun onStart() {
@@ -34,7 +40,7 @@ class HomeViewModel constructor(private val movieRepository: MovieRepository) : 
                 .getListMovieTopRated(Constant.PAGE_DEFAULT)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ movie -> movieObservable.set(movie[0]) },
+                .subscribe({ movie -> bannerObservable.get()!!.setData(movie[0]) },
                     { throwable -> throwable.localizedMessage })
         )
 
@@ -64,6 +70,10 @@ class HomeViewModel constructor(private val movieRepository: MovieRepository) : 
                 .subscribe({ movies -> upComingAdapter.get()!!.replaceItems(movies) },
                     { throwable -> throwable.localizedMessage })
         )
+    }
+
+    fun refreshData() {
+        initData()
     }
 
     override fun onStop() {
