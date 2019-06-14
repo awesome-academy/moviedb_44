@@ -10,6 +10,7 @@ import com.sun_asterisk.moviedb_44.R
 import com.sun_asterisk.moviedb_44.data.model.Movie
 import com.sun_asterisk.moviedb_44.data.repository.MovieRepository
 import com.sun_asterisk.moviedb_44.data.source.local.MovieLocalDataSource
+import com.sun_asterisk.moviedb_44.data.source.local.config.dao.MovieDatabase
 import com.sun_asterisk.moviedb_44.data.source.remote.MovieRemoteDataSource
 import com.sun_asterisk.moviedb_44.databinding.FragmentHomeBinding
 import com.sun_asterisk.moviedb_44.screen.base.BaseFragment
@@ -21,7 +22,8 @@ import com.sun_asterisk.moviedb_44.utils.OnItemRecyclerViewClickListener
 import kotlinx.android.synthetic.main.category_recycler.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : BaseFragment(), OnItemRecyclerViewClickListener<Movie>, OnItemBannerClickListener<Movie>, SwipeRefreshLayout.OnRefreshListener {
+class HomeFragment : BaseFragment(), OnItemRecyclerViewClickListener<Movie>, OnItemBannerClickListener<Movie>,
+    SwipeRefreshLayout.OnRefreshListener {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
@@ -35,9 +37,9 @@ class HomeFragment : BaseFragment(), OnItemRecyclerViewClickListener<Movie>, OnI
         savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil
             .inflate(inflater, R.layout.fragment_home, container, false)
-        viewModel =
-            HomeViewModel(MovieRepository.getInstance(MovieLocalDataSource(),
-                MovieRemoteDataSource.getInstance()), this, this)
+        viewModel = HomeViewModel(MovieRepository.getInstance(
+                    MovieLocalDataSource.getInstance(MovieDatabase.getInstance(context!!).movieDAO()),
+                    MovieRemoteDataSource.getInstance()), this, this)
         binding.viewModel = viewModel
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         binding.toolbar.setTitleTextColor(Color.WHITE)

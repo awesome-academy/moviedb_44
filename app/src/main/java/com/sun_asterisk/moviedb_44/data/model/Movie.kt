@@ -2,10 +2,15 @@ package com.sun_asterisk.moviedb_44.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import com.sun_asterisk.moviedb_44.utils.Constant
 
+@Entity(tableName = "movies", indices = [Index("id")])
 data class Movie(
+    @PrimaryKey
     val id: Int,
     val title: String?,
     @SerializedName("vote_average")
