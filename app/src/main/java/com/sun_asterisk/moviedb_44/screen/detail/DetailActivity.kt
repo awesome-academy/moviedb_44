@@ -33,6 +33,7 @@ class DetailActivity : AppCompatActivity(), OnItemRecyclerViewClickListener<Int>
         binding.imgBookMark.setOnClickListener { viewModel.changeFavorite() }
         binding.imgBack.setOnClickListener { onBackPressed() }
     }
+
     override fun onItemClick(data: Int) {
     }
 

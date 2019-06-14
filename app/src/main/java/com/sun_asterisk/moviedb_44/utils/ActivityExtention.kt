@@ -68,6 +68,18 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int, addToSta
     }
 }
 
+fun AppCompatActivity.showFragment(fragment: Fragment) {
+    supportFragmentManager.inTransaction {
+        show(fragment)
+    }
+}
+
+fun AppCompatActivity.hideFragment(fragment: Fragment) {
+    supportFragmentManager.inTransaction {
+        hide(fragment)
+    }
+}
+
 fun AppCompatActivity.getCurrentFragment(): Fragment? {
     val fragmentManager = supportFragmentManager
     var fragmentTag: String? = ""
