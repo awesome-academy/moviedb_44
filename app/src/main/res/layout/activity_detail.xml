@@ -170,9 +170,21 @@
                 android:layout_width="@dimen/dp_35"
                 android:layout_height="@dimen/dp_35"
                 android:layout_marginEnd="@dimen/dp_16"
-                android:src="@drawable/ic_bookmark"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@{safeUnbox(viewModel.isFavorite) ? @drawable/ic_bookmark : @drawable/ic_not_bookmark}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tvReleaseDate"/>
+
+            <ImageView
+                android:id="@+id/imgBack"
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_8"
+                app:layout_constraintStart_toStartOf="@+id/imgBackDrop"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

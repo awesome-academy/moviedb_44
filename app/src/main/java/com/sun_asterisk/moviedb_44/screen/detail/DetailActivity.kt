@@ -3,6 +3,7 @@ package com.sun_asterisk.moviedb_44.screen.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil.setContentView
 import com.sun_asterisk.moviedb_44.R
@@ -22,13 +23,15 @@ class DetailActivity : AppCompatActivity(), OnItemRecyclerViewClickListener<Int>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         movie = intent.getParcelableExtra(EXTRA_MOVIE)
-        viewModel = DetailViewModel(MovieRepository.getInstance(
+        viewModel = DetailViewModel(movie, MovieRepository.getInstance(
                 MovieLocalDataSource.getInstance(MovieDatabase.getInstance(applicationContext).movieDAO()),
                 MovieRemoteDataSource.getInstance()), this)
         binding = setContentView(this, R.layout.activity_detail)
         binding.movie = movie
         binding.viewModel = viewModel
         viewModel.getActorAndProducer(movie.id)
+        binding.imgBookMark.setOnClickListener { viewModel.changeFavorite() }
+        binding.imgBack.setOnClickListener { onBackPressed() }
     }
     override fun onItemClick(data: Int) {
     }
