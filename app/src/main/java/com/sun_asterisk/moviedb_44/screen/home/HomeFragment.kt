@@ -91,4 +91,10 @@ class HomeFragment : BaseFragment(), OnItemRecyclerViewClickListener<Movie>, OnI
         super.onStop()
         viewModel.onStop()
     }
+
+    companion object {
+        fun getInstance() : HomeFragment {
+            return HomeFragment()
+        }
+    }
 }
